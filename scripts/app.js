@@ -226,11 +226,15 @@ function addHabit(event) {
 (() => {
   loadData();
   const hashId = Number(document.location.hash.replace("#", ""));
-  console.log(hashId)
   const urlHabbit = habbits.find((habbit) => habbit.id === hashId);
   if (urlHabbit) {
     rerender(urlHabbit.id);
-  } else {
+  } else if (habbits.length > 0) {
     rerender(habbits[0].id);
+  } else {
+    // Если нет привычек, показываем пустое состояние
+    page.header.h1.innerText = "Добавьте первую привычку";
+    page.header.progressPercent.innerText = "0%";
+    page.header.progressCoverBar.setAttribute("style", "width: 0%");
   }
 })();
